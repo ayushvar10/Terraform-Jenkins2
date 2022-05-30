@@ -17,9 +17,15 @@ pipeline {
       }
     }
     
+    // stage('Terraform apply') {
+    //   steps {
+    //     sh label: '', script: 'terraform apply --auto-approve'
+    //   }
+    // }
+
     stage('Terraform apply') {
       steps {
-        sh label: '', script: 'terraform apply --auto-approve'
+        sh label: '', script: 'terraform destroy --auto-approve'
       }
     }
   }
