@@ -1,18 +1,26 @@
-data "aws_caller_identity" "current" {}
- 
-data "aws_ami" "ec2_instance" {
+data "aws_ami" "amzlinux" {
   most_recent = true
- 
+  owners = [ "amazon" ]
   filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
+    name = "name"
+    values = [ "amzn2-ami-hvm-*-gp2" ]
   }
- 
-  owners = ["${data.aws_caller_identity.current.account_id}"]
+  filter {
+    name = "root-device-type"
+    values = [ "ebs" ]
+  }
+  filter {
+    name = "virtualization-type"
+    values = [ "hvm" ]
+  }
+  filter {
+    name = "architecture"
+    values = [ "x86_64" ]
+  }
 }
  
 resource "aws_instance" "web" {
-  ami           = "${data.aws_ami.ec2_instance.id}"
+  ami           = data.aws_ami.amzlinux.id
   instance_type = "t2.micro"
  
   tags = {
