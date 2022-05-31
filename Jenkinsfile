@@ -16,6 +16,24 @@ pipeline {
         sh label: '', script: 'terraform init'
       }
     }
+<<<<<<< HEAD
+=======
+
+    stage('test AWS credentials') {
+        steps {
+            withAWS(credentials: 'aws-secretes', region: 'ap-south-1') {
+                sh label: '', script: 'terraform destroy --auto-approve'
+            }
+        }
+
+    }
+    
+    // stage('Terraform apply') {
+    //   steps {
+    //     sh label: '', script: 'terraform apply --auto-approve'
+    //   }
+    // }
+>>>>>>> 910e147720bf1abc2e5225876f581a2f9de7a437
 
     stage('Terraform apply') {
         steps {
