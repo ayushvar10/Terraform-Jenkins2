@@ -19,6 +19,7 @@ pipeline {
     
     stage('Terraform apply') {
       steps {
+       withAWS(credentials: 'aws-secretes', regions: 'ap-south-1')
         sh label: '', script: 'terraform apply --auto-approve'
       }
     }
