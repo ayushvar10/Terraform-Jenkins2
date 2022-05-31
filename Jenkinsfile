@@ -25,7 +25,7 @@ pipeline {
         }
 
     }
-    // stage('Terraform apply') {
+    // stage('Terraform destroy') {
     //     steps {
     //         withAWS(credentials: 'aws-secretes', region: 'ap-south-1') {
     //             sh label: '', script: 'terraform destroy --auto-approve'
