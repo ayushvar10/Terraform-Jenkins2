@@ -7,7 +7,7 @@ pipeline {
   stages {
     // stage('Git Checkout') {
     //   steps {
-    //     git credentialsId: '16**-**-**-**-**cb', url: 'https://git-codecommit.us-west-2.amazonaws.com/v1/repos/TerraformJenkins'
+    //     git credentialsId: '16**-**-**-**-**cb', url: 'https://git-codecommit.us-east-1.amazonaws.com/v1/repos/TerraformJenkins'
     //   }
     // }
 
@@ -16,17 +16,23 @@ pipeline {
         sh label: '', script: 'terraform init'
       }
     }
-    
-    stage('Terraform apply') {
-      steps {
-        sh label: '', script: 'terraform apply --auto-approve'
-      }
-    }
 
+    stage('Terraform apply') {
+        steps {
+            withAWS(credentials: 'aws-secretes', region: 'ap-south-1') {
+                sh label: '', script: 'terraform apply --auto-approve'
+            }
+        }
+
+    }
     // stage('Terraform apply') {
-    //   steps {
-    //     sh label: '', script: 'terraform destroy --auto-approve'
-    //   }
+    //     steps {
+    //         withAWS(credentials: 'aws-secretes', region: 'ap-south-1') {
+    //             sh label: '', script: 'terraform destroy --auto-approve'
+    //         }
+    //     }
+
     // }
+
   }
 }
