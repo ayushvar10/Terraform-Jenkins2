@@ -19,16 +19,18 @@ pipeline {
 
     stage('test AWS credentials') {
         steps {
-            withAWS(credentials: 'aws-secretes', region: 'ap-south-1')
+            withAWS(credentials: 'aws-secretes', region: 'ap-south-1') {
+                sh label: '', script: 'terraform apply --auto-approve'
+            }
         }
 
     }
     
-    stage('Terraform apply') {
-      steps {
-        sh label: '', script: 'terraform apply --auto-approve'
-      }
-    }
+    // stage('Terraform apply') {
+    //   steps {
+    //     sh label: '', script: 'terraform apply --auto-approve'
+    //   }
+    // }
 
     // stage('Terraform apply') {
     //   steps {
