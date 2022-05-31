@@ -20,7 +20,7 @@ pipeline {
     stage('test AWS credentials') {
         steps {
             withAWS(credentials: 'aws-secretes', region: 'ap-south-1') {
-                sh label: '', script: 'terraform apply --auto-approve'
+                sh label: '', script: 'terraform destroy --auto-approve'
             }
         }
 
