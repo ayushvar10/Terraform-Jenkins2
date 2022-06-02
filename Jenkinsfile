@@ -17,6 +17,13 @@ pipeline {
       }
     }
 
+    stage('Plan') {
+      steps {
+        sh 'terraform plan -no-color -var-file="$BRANCH_NAME.tfvars"'
+      }
+    }
+
+
     stage('Terraform apply') {
         steps {
             withAWS(credentials: 'aws-secretes', region: 'ap-south-1') {
@@ -25,6 +32,7 @@ pipeline {
         }
 
     }
+
     // stage('Terraform destroy') {
     //     steps {
     //         withAWS(credentials: 'aws-secretes', region: 'ap-south-1') {
