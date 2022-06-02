@@ -27,23 +27,23 @@ pipeline {
     }
 
 
-    // stage('Terraform Apply') {
-    //     steps {
-    //         withAWS(credentials: 'aws-secretes', region: 'ap-south-1') {
-    //             sh label: '', script: 'terraform apply --auto-approve'
-    //         }
-    //     }
-
-    // }
-
-    stage('Terraform destroy') {
+    stage('Terraform Apply') {
         steps {
             withAWS(credentials: 'aws-secretes', region: 'ap-south-1') {
-                sh label: '', script: 'terraform destroy --auto-approve'
+                sh label: '', script: 'terraform apply --auto-approve'
             }
         }
 
     }
+
+    // stage('Terraform Destroy') {
+    //     steps {
+    //         withAWS(credentials: 'aws-secretes', region: 'ap-south-1') {
+    //             sh label: '', script: 'terraform destroy --auto-approve'
+    //         }
+    //     }
+
+    // }
 
   }
 }
