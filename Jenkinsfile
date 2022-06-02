@@ -17,7 +17,7 @@ pipeline {
       }
     }
 
-    stage('Plan') {
+    stage('Terraform Plan') {
       steps {
         withAWS(credentials: 'aws-secretes', region: 'ap-south-1') {
           sh 'terraform plan -no-color'
@@ -27,7 +27,7 @@ pipeline {
     }
 
 
-    stage('Terraform apply') {
+    stage('Terraform Apply') {
         steps {
             withAWS(credentials: 'aws-secretes', region: 'ap-south-1') {
                 sh label: '', script: 'terraform apply --auto-approve'
