@@ -19,7 +19,10 @@ pipeline {
 
     stage('Plan') {
       steps {
-        sh 'terraform plan -no-color'
+        withAWS(credentials: 'aws-secretes', region: 'ap-south-1') {
+          sh 'terraform plan -no-color'
+        }
+        
       }
     }
 
